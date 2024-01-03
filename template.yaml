@@ -1,0 +1,296 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: SwapFactory
+    network: {{ network }}
+    source:
+      address: '{{ swap_factory.address }}'
+      abi: SwapFactory
+      startBlock: {{ swap_factory.startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - SwapPair
+        - Token
+        - SwapFactory
+      abis:
+        - name: SwapFactory
+          file: ./packages/abis/SwapFactory.json
+        - name: ERC20
+          file: ./packages/abis/ERC20.json
+        - name: ERC20SymbolBytes
+          file: ./packages/abis/ERC20SymbolBytes.json
+        - name: ERC20NameBytes
+          file: ./packages/abis/ERC20NameBytes.json
+      eventHandlers:
+        - event: PairCreated(indexed address,indexed address,address,uint256)
+          handler: handleNewPair
+      file: ./src/mappings/swapFactory.ts
+  - kind: ethereum/contract
+    name: CreditStaking
+    network: {{ network }}
+    source:
+      address: "{{ credit_staking.address }}"
+      abi: CreditStaking
+      startBlock: {{ credit_staking.startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - CreditStaking
+        - DividendsInfo
+        - UserInfo
+      abis:
+        - name: CreditStaking
+          file: ./packages/abis/CreditStaking.json
+        - name: ERC20
+          file: ./packages/abis/ERC20.json
+      eventHandlers:
+        - event: UpdatedCurrentCycleStartTime(uint256)
+          handler: updateCurrentCycleStartTime
+        - event: DividendsCollected(indexed address,indexed address,uint256)
+          handler: dividendsCollected
+        - event: DividendsAddedToPending(indexed address,uint256)
+          handler: dividendsAddedToPending
+        - event: UserUpdated(indexed address,uint256,uint256,uint256)
+          handler: userUpdated
+        - event: DividendsUpdated(indexed address,uint256)
+          handler: dividendsUpdated
+        - event: DistributedTokenEnabled(indexed address)
+          handler: distributedTokenEnabled
+        - event: DistributedTokenDisabled(indexed address)
+          handler: distributedTokenDisabled
+        - event: DistributedTokenRemoved(indexed address)
+          handler: distributedTokenRemoved
+        - event: DistributedTokenRemoved(indexed address)
+          handler: distributedTokenRemoved
+        - event: Initialized(uint8)
+          handler: initialize
+      file: ./src/mappings/creditStaking.ts
+  - kind: ethereum/contract
+    name: LPFarming
+    network: {{ network }}
+    source:
+      address: "{{ lp_farming.address }}"
+      abi: LPFarming
+      startBlock: {{ lp_farming.startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - LPFarming
+        - History
+        - Pool
+        - PoolHistory
+        - FarmUser
+      abis:
+        - name: LPFarming
+          file: ./packages/abis/LPFarming.json
+        - name: CreditFactory
+          file: ./packages/abis/CreditFactory.json
+        - name: CreditPair
+          file: ./packages/abis/CreditPair.json
+        - name: ERC20
+          file: ./packages/abis/ERC20.json
+      eventHandlers:
+        - event: EmergencyWithdraw(indexed address,indexed bytes32,uint256,uint256[])
+          handler: emergencyWithdraw
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: ownershipTransferred
+        - event: Deposit(indexed address,indexed bytes32,indexed uint256,uint256)
+          handler: deposit
+        - event: Withdraw(indexed address,indexed bytes32,indexed uint256,uint256)
+          handler: withdraw
+        - event: LogPoolAddition(indexed bytes32,uint256,address,uint256)
+          handler: addPool
+        - event: LogUpdatePool(indexed bytes32,uint256,uint256,uint256)
+          handler: updatePool
+        - event: LogPoolExpiration(indexed bytes32)
+          handler: expirePool
+        - event: Harvest(indexed address,indexed bytes32,uint256,uint256)
+          handler: harvest
+      file: ./src/mappings/lpFarm.ts
+  - kind: ethereum/contract
+    name: CreditFactory
+    network: {{ network }}
+    source:
+      address: "{{ lending_factory.address }}"
+      abi: CreditFactory
+      startBlock: {{ lending_factory.startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - CreditPair
+        - CreditFactory
+        - Token
+      abis:
+        - name: CreditFactory
+          file: ./packages/abis/CreditFactory.json
+        - name: CreditPair
+          file: ./packages/abis/CreditPair.json
+        - name: ERC20
+          file: ./packages/abis/ERC20.json
+        - name: ERC20SymbolBytes
+          file: ./packages/abis/ERC20SymbolBytes.json
+        - name: ERC20NameBytes
+          file: ./packages/abis/ERC20NameBytes.json
+      eventHandlers:
+        - event: CreatePair(indexed address,indexed address,address)
+          handler: onCreditPairCreated
+      file: ./src/mappings/creditFactory.ts
+  - kind: ethereum/contract
+    name: Distributor
+    network: {{ network }}
+    source:
+      address: "{{ distributor.address }}"
+      abi: Distributor
+      startBlock: {{ distributor.startBlock }}
+    mapping:
+      entities:
+        - Distributor
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      abis:
+        - name: Distributor
+          file: ./packages/abis/Distributor.json
+        - name: LPFarming
+          file: ./packages/abis/LPFarming.json
+      eventHandlers:
+        - event: UpdateEmissionRate(uint256)
+          handler: onEmissionRateUpdated
+      file: ./src/mappings/distributor.ts
+  - kind: ethereum/contract
+    name: CreditPositionManager
+    network: {{ network }}
+    source:
+      address: "{{ credit_position.address }}"
+      abi: CreditPositionManager
+      startBlock: {{ credit_position.startBlock }}
+    mapping:
+      entities:
+        - CreditPosition
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      abis:
+        - name: CreditPositionManager
+          file: ./packages/abis/CreditPositionManager.json
+        - name: CreditRouter
+          file: ./packages/abis/CreditRouter.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: onTransfer
+        - event: CreditPositionCreated(address,uint256,indexed address,indexed uint256,uint8)
+          handler: onCreditPositionCreated
+        - event: CreditPositionBurnt(indexed uint256)
+          handler: onCreditPositionRemoved
+      file: ./src/mappings/creditPosition.ts
+templates:
+  - kind: ethereum/contract
+    name: SwapPair
+    network: {{ network }}
+    source:
+      abi: SwapPair
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - SwapPair
+        - Token
+        - SwapFactory
+      abis:
+        - name: SwapPair
+          file: ./packages/abis/SwapPair.json
+        - name: SwapFactory
+          file: ./packages/abis/SwapFactory.json
+      eventHandlers:
+        - event: Mint(indexed address,uint256,uint256)
+          handler: handleMint
+        - event: Burn(indexed address,uint256,uint256,indexed address)
+          handler: handleBurn
+        - event: Swap(indexed address,uint256,uint256,uint256,uint256,indexed address)
+          handler: handleSwap
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+        - event: Sync(uint112,uint112)
+          handler: handleSync
+      file: ./src/mappings/swap.ts
+  - kind: ethereum/contract
+    name: CreditPair
+    network: {{ network }}
+    source:
+      abi: CreditPair
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - CreditPair
+        - CreditFactory
+        - CreditPairPool
+        - Token
+        - LockedDebt
+        - CreditPosition
+        - CreditTransaction
+      abis:
+        - name: CreditPair
+          file: ./packages/abis/CreditPair.json
+        - name: CreditFactory
+          file: ./packages/abis/CreditFactory.json
+        - name: ERC20
+          file: ./packages/abis/ERC20.json
+        - name: ERC20SymbolBytes
+          file: ./packages/abis/ERC20SymbolBytes.json
+        - name: ERC20NameBytes
+          file: ./packages/abis/ERC20NameBytes.json
+        - name: CreditRouter
+          file: ./packages/abis/CreditRouter.json
+        - name: LockedDebt
+          file: ./packages/abis/LockedDebt.json
+        - name: CreditPositionManager
+          file: ./packages/abis/CreditPositionManager.json
+      eventHandlers:
+        - event: Borrow(uint256,indexed address,indexed address,indexed address,uint256,uint256,(uint112,uint112,uint32),uint256,uint256,uint256)
+          handler: onBorrow
+        - event: Burn(uint256,indexed address,indexed address,indexed address,uint256,uint256,uint128,uint256)
+          handler: onBurn
+        - event: Lend(uint256,indexed address,indexed address,indexed address,uint256,(uint112,uint112,uint112,uint112),uint256,uint256,uint256)
+          handler: onLend
+        - event: Mint(uint256,indexed address,indexed address,indexed address,uint256,uint256,uint256,(uint112,uint112,uint32),uint256)
+          handler: onMint
+        - event: Pay(uint256,indexed address,indexed address,indexed address,uint256,uint128,uint128)
+          handler: onPay
+        - event: Sync(indexed uint256,uint112,uint112,uint112)
+          handler: onSync
+        - event: Withdraw(uint256,indexed address,indexed address,indexed address,(uint112,uint112,uint112,uint112),(uint128,uint128))
+          handler: onWithdraw
+      file: ./src/mappings/creditPair.ts
+  - kind: ethereum/contract
+    name: LockedDebt
+    network: {{ network }}
+    source:
+      abi: LockedDebt
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - BorrowPosition
+        - User
+      abis:
+        - name: LockedDebt
+          file: ./packages/abis/LockedDebt.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleLockedDebtTokenTransfer
+      file: ./src/mappings/creditPair.ts

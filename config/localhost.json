@@ -1,0 +1,38 @@
+{
+  "network": "mainnet",
+  "lending_factory": {
+    "address": "0xcc3b9A2510f828c952e67C024C3dE60839Aca842",
+    "startBlock": 95587678
+  },
+  "lp_farming": {
+    "address": "0xbC5eC82C3C8D0e36660557599D33fbF95c9738f1",
+    "startBlock": 95587678
+  },
+  "credit_staking": {
+    "address": "0x39A41BAaf5cED9245a22fEA1b349D1E658992216",
+    "startBlock": 95587678
+  },
+  "swap_factory": {
+    "address": "0x3A4a0F1FC238bb0C694A5E7535069c02622Ac5DF",
+    "startBlock": 95587678
+  },
+  "distributor": {
+    "address": "0x7223fF34EED050aeb29432521b084Efb8d296914",
+    "startBlock": 95587678
+  },
+  "convenience_adress": "0x87411145423fDf9123040799F9Ff894153339a75",
+  "credit_token_address":"0x685d694dF37BE88553E72E17AFe4B7A570B93Efb",
+  "weth_address": "0x82af49447d8a07e3bd95bd0d56f35241523fbab1",
+  "usdc_weth_address": "0xa8400b541dc474f7feaad6eac05280279edf3b51",
+  "//": "[WBTC]",
+  "unused": ["0x2f2a2543b76a4166549f7aab2e75bef0aefc5b0f"],
+  "///": "[WETH, USDC, USDT, DAI, FRAX, WBTC]",
+  "whitelist": [
+    "0x82af49447d8a07e3bd95bd0d56f35241523fbab1",
+    "0xfa64f316e627ad8360de2476af0dd9250018cfc5",
+    "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
+    "0xda10009cbd5d07dd0cecc66161fc93d7c9000da1",
+    "0x17fc002b466eec40dae837fc4be5c67993ddbd6f",
+    "0x2f2a2543b76a4166549f7aab2e75bef0aefc5b0f"
+  ]
+}

@@ -1,0 +1,2278 @@
+[
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "previousAdmin",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "newAdmin",
+        "type": "address"
+      }
+    ],
+    "name": "AdminChanged",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "beacon",
+        "type": "address"
+      }
+    ],
+    "name": "BeaconUpgraded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint8",
+        "name": "version",
+        "type": "uint8"
+      }
+    ],
+    "name": "Initialized",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "implementation",
+        "type": "address"
+      }
+    ],
+    "name": "Upgraded",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "contract IERC20",
+            "name": "asset",
+            "type": "address"
+          },
+          {
+            "internalType": "contract IERC20",
+            "name": "collateral",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maturity",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "assetTo",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "dueTo",
+            "type": "address"
+          },
+          {
+            "internalType": "uint112",
+            "name": "assetOut",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint40",
+            "name": "percent",
+            "type": "uint40"
+          },
+          {
+            "internalType": "uint112",
+            "name": "maxDebt",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint112",
+            "name": "maxCollateral",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint256",
+            "name": "deadline",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct IBorrow.BorrowGivenPercent",
+        "name": "params",
+        "type": "tuple"
+      }
+    ],
+    "name": "borrowGivenPercent",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "assetOut",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint112",
+            "name": "debt",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint112",
+            "name": "collateral",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint32",
+            "name": "startBlock",
+            "type": "uint32"
+          }
+        ],
+        "internalType": "struct IPair.Due",
+        "name": "dueOut",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "contract IERC20",
+            "name": "collateral",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maturity",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address payable",
+            "name": "assetTo",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "dueTo",
+            "type": "address"
+          },
+          {
+            "internalType": "uint112",
+            "name": "assetOut",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint40",
+            "name": "percent",
+            "type": "uint40"
+          },
+          {
+            "internalType": "uint112",
+            "name": "maxDebt",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint112",
+            "name": "maxCollateral",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint256",
+            "name": "deadline",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct IBorrow.BorrowGivenPercentETHAsset",
+        "name": "params",
+        "type": "tuple"
+      }
+    ],
+    "name": "borrowGivenPercentETHAsset",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "assetOut",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint112",
+            "name": "debt",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint112",
+            "name": "collateral",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint32",
+            "name": "startBlock",
+            "type": "uint32"
+          }
+        ],
+        "internalType": "struct IPair.Due",
+        "name": "dueOut",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "contract IERC20",
+            "name": "asset",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maturity",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "assetTo",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "dueTo",
+            "type": "address"
+          },
+          {
+            "internalType": "uint112",
+            "name": "assetOut",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint40",
+            "name": "percent",
+            "type": "uint40"
+          },
+          {
+            "internalType": "uint112",
+            "name": "maxDebt",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint256",
+            "name": "deadline",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct IBorrow.BorrowGivenPercentETHCollateral",
+        "name": "params",
+        "type": "tuple"
+      }
+    ],
+    "name": "borrowGivenPercentETHCollateral",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "assetOut",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint112",
+            "name": "debt",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint112",
+            "name": "collateral",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint32",
+            "name": "startBlock",
+            "type": "uint32"
+          }
+        ],
+        "internalType": "struct IPair.Due",
+        "name": "dueOut",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "contract IERC20",
+            "name": "asset",
+            "type": "address"
+          },
+          {
+            "internalType": "contract IERC20",
+            "name": "collateral",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maturity",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "assetTo",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "collateralTo",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "creditPositionId",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct IWithdraw.Collect",
+        "name": "params",
+        "type": "tuple"
+      }
+    ],
+    "name": "collect",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint128",
+            "name": "asset",
+            "type": "uint128"
+          },
+          {
+            "internalType": "uint128",
+            "name": "collateral",
+            "type": "uint128"
+          }
+        ],
+        "internalType": "struct IPair.Tokens",
+        "name": "tokensOut",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "contract IERC20",
+            "name": "collateral",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maturity",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address payable",
+            "name": "assetTo",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "collateralTo",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "creditPositionId",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct IWithdraw.CollectETHAsset",
+        "name": "params",
+        "type": "tuple"
+      }
+    ],
+    "name": "collectETHAsset",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint128",
+            "name": "asset",
+            "type": "uint128"
+          },
+          {
+            "internalType": "uint128",
+            "name": "collateral",
+            "type": "uint128"
+          }
+        ],
+        "internalType": "struct IPair.Tokens",
+        "name": "tokensOut",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "contract IERC20",
+            "name": "asset",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maturity",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "assetTo",
+            "type": "address"
+          },
+          {
+            "internalType": "address payable",
+            "name": "collateralTo",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "creditPositionId",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct IWithdraw.CollectETHCollateral",
+        "name": "params",
+        "type": "tuple"
+      }
+    ],
+    "name": "collectETHCollateral",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint128",
+            "name": "asset",
+            "type": "uint128"
+          },
+          {
+            "internalType": "uint128",
+            "name": "collateral",
+            "type": "uint128"
+          }
+        ],
+        "internalType": "struct IPair.Tokens",
+        "name": "tokensOut",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint112",
+        "name": "collateralIn",
+        "type": "uint112"
+      },
+      {
+        "internalType": "bytes",
+        "name": "data",
+        "type": "bytes"
+      }
+    ],
+    "name": "creditBorrowCallback",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "assetIn",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes",
+        "name": "data",
+        "type": "bytes"
+      }
+    ],
+    "name": "creditLendCallback",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "assetIn",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint112",
+        "name": "collateralIn",
+        "type": "uint112"
+      },
+      {
+        "internalType": "bytes",
+        "name": "data",
+        "type": "bytes"
+      }
+    ],
+    "name": "creditMintCallback",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint128",
+        "name": "assetIn",
+        "type": "uint128"
+      },
+      {
+        "internalType": "bytes",
+        "name": "data",
+        "type": "bytes"
+      }
+    ],
+    "name": "creditPayCallback",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "creditPositionManager",
+    "outputs": [
+      {
+        "internalType": "contract ICreditPositionManager",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "contract IERC20",
+            "name": "asset",
+            "type": "address"
+          },
+          {
+            "internalType": "contract IERC20",
+            "name": "collateral",
+            "type": "address"
+          }
+        ],
+        "internalType": "struct IDeployPair.DeployPair",
+        "name": "params",
+        "type": "tuple"
+      }
+    ],
+    "name": "deployPair",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "factory",
+    "outputs": [
+      {
+        "internalType": "contract IFactory",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "contract IFactory",
+        "name": "_factory",
+        "type": "address"
+      },
+      {
+        "internalType": "contract IWETH",
+        "name": "_weth",
+        "type": "address"
+      },
+      {
+        "internalType": "contract ICreditPositionManager",
+        "name": "_creditPositionManager",
+        "type": "address"
+      }
+    ],
+    "name": "initialize",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "contract IERC20",
+            "name": "asset",
+            "type": "address"
+          },
+          {
+            "internalType": "contract IERC20",
+            "name": "collateral",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maturity",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "to",
+            "type": "address"
+          },
+          {
+            "internalType": "uint112",
+            "name": "assetIn",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint40",
+            "name": "percent",
+            "type": "uint40"
+          },
+          {
+            "internalType": "uint128",
+            "name": "minLoan",
+            "type": "uint128"
+          },
+          {
+            "internalType": "uint128",
+            "name": "minCoverage",
+            "type": "uint128"
+          },
+          {
+            "internalType": "uint256",
+            "name": "deadline",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct ILend.LendGivenPercent",
+        "name": "params",
+        "type": "tuple"
+      }
+    ],
+    "name": "lendGivenPercent",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "assetIn",
+        "type": "uint256"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint112",
+            "name": "loanPrincipal",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint112",
+            "name": "loanInterest",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint112",
+            "name": "coveragePrincipal",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint112",
+            "name": "coverageInterest",
+            "type": "uint112"
+          }
+        ],
+        "internalType": "struct IPair.Claims",
+        "name": "claimsOut",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "contract IERC20",
+            "name": "collateral",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maturity",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "to",
+            "type": "address"
+          },
+          {
+            "internalType": "uint40",
+            "name": "percent",
+            "type": "uint40"
+          },
+          {
+            "internalType": "uint128",
+            "name": "minLoan",
+            "type": "uint128"
+          },
+          {
+            "internalType": "uint128",
+            "name": "minCoverage",
+            "type": "uint128"
+          },
+          {
+            "internalType": "uint256",
+            "name": "deadline",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct ILend.LendGivenPercentETHAsset",
+        "name": "params",
+        "type": "tuple"
+      }
+    ],
+    "name": "lendGivenPercentETHAsset",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "assetIn",
+        "type": "uint256"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint112",
+            "name": "loanPrincipal",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint112",
+            "name": "loanInterest",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint112",
+            "name": "coveragePrincipal",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint112",
+            "name": "coverageInterest",
+            "type": "uint112"
+          }
+        ],
+        "internalType": "struct IPair.Claims",
+        "name": "claimsOut",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "contract IERC20",
+            "name": "asset",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maturity",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "to",
+            "type": "address"
+          },
+          {
+            "internalType": "uint112",
+            "name": "assetIn",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint40",
+            "name": "percent",
+            "type": "uint40"
+          },
+          {
+            "internalType": "uint128",
+            "name": "minLoan",
+            "type": "uint128"
+          },
+          {
+            "internalType": "uint128",
+            "name": "minCoverage",
+            "type": "uint128"
+          },
+          {
+            "internalType": "uint256",
+            "name": "deadline",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct ILend.LendGivenPercentETHCollateral",
+        "name": "params",
+        "type": "tuple"
+      }
+    ],
+    "name": "lendGivenPercentETHCollateral",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "assetIn",
+        "type": "uint256"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint112",
+            "name": "loanPrincipal",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint112",
+            "name": "loanInterest",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint112",
+            "name": "coveragePrincipal",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint112",
+            "name": "coverageInterest",
+            "type": "uint112"
+          }
+        ],
+        "internalType": "struct IPair.Claims",
+        "name": "claimsOut",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "contract IERC20",
+            "name": "asset",
+            "type": "address"
+          },
+          {
+            "internalType": "contract IERC20",
+            "name": "collateral",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maturity",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "liquidityTo",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "dueTo",
+            "type": "address"
+          },
+          {
+            "internalType": "uint112",
+            "name": "assetIn",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint256",
+            "name": "minLiquidity",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint112",
+            "name": "maxDebt",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint112",
+            "name": "maxCollateral",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint256",
+            "name": "deadline",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct IMint.LiquidityGivenAsset",
+        "name": "params",
+        "type": "tuple"
+      }
+    ],
+    "name": "liquidityGivenAsset",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "assetIn",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "liquidityOut",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint112",
+            "name": "debt",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint112",
+            "name": "collateral",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint32",
+            "name": "startBlock",
+            "type": "uint32"
+          }
+        ],
+        "internalType": "struct IPair.Due",
+        "name": "dueOut",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "contract IERC20",
+            "name": "collateral",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maturity",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "liquidityTo",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "dueTo",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "minLiquidity",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint112",
+            "name": "maxDebt",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint112",
+            "name": "maxCollateral",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint256",
+            "name": "deadline",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct IMint.LiquidityGivenAssetETHAsset",
+        "name": "params",
+        "type": "tuple"
+      }
+    ],
+    "name": "liquidityGivenAssetETHAsset",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "assetIn",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "liquidityOut",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint112",
+            "name": "debt",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint112",
+            "name": "collateral",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint32",
+            "name": "startBlock",
+            "type": "uint32"
+          }
+        ],
+        "internalType": "struct IPair.Due",
+        "name": "dueOut",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "contract IERC20",
+            "name": "asset",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maturity",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "liquidityTo",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "dueTo",
+            "type": "address"
+          },
+          {
+            "internalType": "uint112",
+            "name": "assetIn",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint256",
+            "name": "minLiquidity",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint112",
+            "name": "maxDebt",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint256",
+            "name": "deadline",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct IMint.LiquidityGivenAssetETHCollateral",
+        "name": "params",
+        "type": "tuple"
+      }
+    ],
+    "name": "liquidityGivenAssetETHCollateral",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "assetIn",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "liquidityOut",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint112",
+            "name": "debt",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint112",
+            "name": "collateral",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint32",
+            "name": "startBlock",
+            "type": "uint32"
+          }
+        ],
+        "internalType": "struct IPair.Due",
+        "name": "dueOut",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "contract IERC20",
+            "name": "asset",
+            "type": "address"
+          },
+          {
+            "internalType": "contract IERC20",
+            "name": "collateral",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maturity",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "liquidityTo",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "dueTo",
+            "type": "address"
+          },
+          {
+            "internalType": "uint112",
+            "name": "collateralIn",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint256",
+            "name": "minLiquidity",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint112",
+            "name": "maxAsset",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint112",
+            "name": "maxDebt",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint256",
+            "name": "deadline",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct IMint.LiquidityGivenCollateral",
+        "name": "params",
+        "type": "tuple"
+      }
+    ],
+    "name": "liquidityGivenCollateral",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "assetIn",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "liquidityOut",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint112",
+            "name": "debt",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint112",
+            "name": "collateral",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint32",
+            "name": "startBlock",
+            "type": "uint32"
+          }
+        ],
+        "internalType": "struct IPair.Due",
+        "name": "dueOut",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "contract IERC20",
+            "name": "collateral",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maturity",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "liquidityTo",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "dueTo",
+            "type": "address"
+          },
+          {
+            "internalType": "uint112",
+            "name": "collateralIn",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint256",
+            "name": "minLiquidity",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint112",
+            "name": "maxDebt",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint256",
+            "name": "deadline",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct IMint.LiquidityGivenCollateralETHAsset",
+        "name": "params",
+        "type": "tuple"
+      }
+    ],
+    "name": "liquidityGivenCollateralETHAsset",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "assetIn",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "liquidityOut",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint112",
+            "name": "debt",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint112",
+            "name": "collateral",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint32",
+            "name": "startBlock",
+            "type": "uint32"
+          }
+        ],
+        "internalType": "struct IPair.Due",
+        "name": "dueOut",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "contract IERC20",
+            "name": "asset",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maturity",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "liquidityTo",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "dueTo",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "minLiquidity",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint112",
+            "name": "maxAsset",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint112",
+            "name": "maxDebt",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint256",
+            "name": "deadline",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct IMint.LiquidityGivenCollateralETHCollateral",
+        "name": "params",
+        "type": "tuple"
+      }
+    ],
+    "name": "liquidityGivenCollateralETHCollateral",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "assetIn",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "liquidityOut",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint112",
+            "name": "debt",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint112",
+            "name": "collateral",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint32",
+            "name": "startBlock",
+            "type": "uint32"
+          }
+        ],
+        "internalType": "struct IPair.Due",
+        "name": "dueOut",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "contract IERC20",
+            "name": "asset",
+            "type": "address"
+          },
+          {
+            "internalType": "contract IERC20",
+            "name": "collateral",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maturity",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "liquidityTo",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "dueTo",
+            "type": "address"
+          },
+          {
+            "internalType": "uint112",
+            "name": "assetIn",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint112",
+            "name": "debtIn",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint112",
+            "name": "collateralIn",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint256",
+            "name": "deadline",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct IMint.NewLiquidity",
+        "name": "params",
+        "type": "tuple"
+      }
+    ],
+    "name": "newLiquidity",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "assetIn",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "liquidityOut",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint112",
+            "name": "debt",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint112",
+            "name": "collateral",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint32",
+            "name": "startBlock",
+            "type": "uint32"
+          }
+        ],
+        "internalType": "struct IPair.Due",
+        "name": "dueOut",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "contract IERC20",
+            "name": "collateral",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maturity",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "liquidityTo",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "dueTo",
+            "type": "address"
+          },
+          {
+            "internalType": "uint112",
+            "name": "debtIn",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint112",
+            "name": "collateralIn",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint256",
+            "name": "deadline",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct IMint.NewLiquidityETHAsset",
+        "name": "params",
+        "type": "tuple"
+      }
+    ],
+    "name": "newLiquidityETHAsset",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "assetIn",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "liquidityOut",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint112",
+            "name": "debt",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint112",
+            "name": "collateral",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint32",
+            "name": "startBlock",
+            "type": "uint32"
+          }
+        ],
+        "internalType": "struct IPair.Due",
+        "name": "dueOut",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "contract IERC20",
+            "name": "asset",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maturity",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "liquidityTo",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "dueTo",
+            "type": "address"
+          },
+          {
+            "internalType": "uint112",
+            "name": "assetIn",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint112",
+            "name": "debtIn",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint256",
+            "name": "deadline",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct IMint.NewLiquidityETHCollateral",
+        "name": "params",
+        "type": "tuple"
+      }
+    ],
+    "name": "newLiquidityETHCollateral",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "assetIn",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "liquidityOut",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint112",
+            "name": "debt",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint112",
+            "name": "collateral",
+            "type": "uint112"
+          },
+          {
+            "internalType": "uint32",
+            "name": "startBlock",
+            "type": "uint32"
+          }
+        ],
+        "internalType": "struct IPair.Due",
+        "name": "dueOut",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes",
+        "name": "",
+        "type": "bytes"
+      }
+    ],
+    "name": "onERC721Received",
+    "outputs": [
+      {
+        "internalType": "bytes4",
+        "name": "",
+        "type": "bytes4"
+      }
+    ],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "proxiableUUID",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "contract IERC20",
+            "name": "asset",
+            "type": "address"
+          },
+          {
+            "internalType": "contract IERC20",
+            "name": "collateral",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maturity",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "assetTo",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "collateralTo",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "creditPositionId",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct IBurn.RemoveLiquidity",
+        "name": "params",
+        "type": "tuple"
+      }
+    ],
+    "name": "removeLiquidity",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "assetOut",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint128",
+        "name": "collateralOut",
+        "type": "uint128"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "contract IERC20",
+            "name": "collateral",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maturity",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address payable",
+            "name": "assetTo",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "collateralTo",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "creditPositionId",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct IBurn.RemoveLiquidityETHAsset",
+        "name": "params",
+        "type": "tuple"
+      }
+    ],
+    "name": "removeLiquidityETHAsset",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "assetOut",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint128",
+        "name": "collateralOut",
+        "type": "uint128"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "contract IERC20",
+            "name": "asset",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maturity",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "assetTo",
+            "type": "address"
+          },
+          {
+            "internalType": "address payable",
+            "name": "collateralTo",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "creditPositionId",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct IBurn.RemoveLiquidityETHCollateral",
+        "name": "params",
+        "type": "tuple"
+      }
+    ],
+    "name": "removeLiquidityETHCollateral",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "assetOut",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint128",
+        "name": "collateralOut",
+        "type": "uint128"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "contract IERC20",
+            "name": "asset",
+            "type": "address"
+          },
+          {
+            "internalType": "contract IERC20",
+            "name": "collateral",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maturity",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "collateralTo",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "creditPositionIds",
+            "type": "uint256[]"
+          },
+          {
+            "internalType": "uint112[]",
+            "name": "maxAssetsIn",
+            "type": "uint112[]"
+          },
+          {
+            "internalType": "uint256",
+            "name": "deadline",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct IPay.Repay",
+        "name": "params",
+        "type": "tuple"
+      }
+    ],
+    "name": "repay",
+    "outputs": [
+      {
+        "internalType": "uint128",
+        "name": "assetIn",
+        "type": "uint128"
+      },
+      {
+        "internalType": "uint128",
+        "name": "collateralOut",
+        "type": "uint128"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "creditPositionFullyPaid",
+        "type": "uint256[]"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "contract IERC20",
+            "name": "collateral",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maturity",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "collateralTo",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "creditPositionIds",
+            "type": "uint256[]"
+          },
+          {
+            "internalType": "uint112[]",
+            "name": "maxAssetsIn",
+            "type": "uint112[]"
+          },
+          {
+            "internalType": "uint256",
+            "name": "deadline",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct IPay.RepayETHAsset",
+        "name": "params",
+        "type": "tuple"
+      }
+    ],
+    "name": "repayETHAsset",
+    "outputs": [
+      {
+        "internalType": "uint128",
+        "name": "assetIn",
+        "type": "uint128"
+      },
+      {
+        "internalType": "uint128",
+        "name": "collateralOut",
+        "type": "uint128"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "creditPositionFullyPaid",
+        "type": "uint256[]"
+      }
+    ],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "contract IERC20",
+            "name": "asset",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maturity",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address payable",
+            "name": "collateralTo",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "creditPositionIds",
+            "type": "uint256[]"
+          },
+          {
+            "internalType": "uint112[]",
+            "name": "maxAssetsIn",
+            "type": "uint112[]"
+          },
+          {
+            "internalType": "uint256",
+            "name": "deadline",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct IPay.RepayETHCollateral",
+        "name": "params",
+        "type": "tuple"
+      }
+    ],
+    "name": "repayETHCollateral",
+    "outputs": [
+      {
+        "internalType": "uint128",
+        "name": "assetIn",
+        "type": "uint128"
+      },
+      {
+        "internalType": "uint128",
+        "name": "collateralOut",
+        "type": "uint128"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "creditPositionFullyPaid",
+        "type": "uint256[]"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "newImplementation",
+        "type": "address"
+      }
+    ],
+    "name": "upgradeTo",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "newImplementation",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes",
+        "name": "data",
+        "type": "bytes"
+      }
+    ],
+    "name": "upgradeToAndCall",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "weth",
+    "outputs": [
+      {
+        "internalType": "contract IWETH",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "stateMutability": "payable",
+    "type": "receive"
+  }
+]

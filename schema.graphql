@@ -1,0 +1,660 @@
+type CreditFactory @entity {
+  # factory address
+  id: ID!
+
+  # pair info
+  pairCount: BigInt!
+  pairs: [CreditPair!]! @derivedFrom(field: "factory")
+
+  lastCreditTokenId: BigInt
+}
+
+type CreditTransaction @entity(immutable: true) {
+  id: ID! # creditPairPool-id
+  pool: CreditPairPool!
+  txHash: String!
+  blockNumber: BigInt!
+  previousBlockNumber: BigInt!
+  timestamp: BigInt!
+  user: User!
+  maxAPR: BigDecimal!
+  type: String!
+  assetValue: BigDecimal!
+  collateralValue: BigDecimal!
+  assetAmount: BigInt!
+  collateralAmount: BigInt!
+  X: BigInt!
+  Y: BigInt!
+  Z: BigInt!
+  index: BigInt!
+}
+
+type CreditPair @entity {
+  id: ID!
+  name: String!
+  # asset token
+  asset: Token!
+  # collateral token
+  collateral: Token!
+  # Credit factory
+  factory: CreditFactory!
+  # # maturity pools
+  pools: [CreditPairPool!]! @derivedFrom(field: "pair")
+  poolCount: BigInt!
+  # fees
+  fee: BigInt!
+  protocolFee: BigInt!
+  stakingFee: BigInt!
+  # Created at
+  timestamp: BigInt!
+  block: BigInt!
+}
+
+type CreditPairPool @entity {
+  # ${pairAdress}-${maturity}
+  id: ID!
+  maturity: BigInt!
+  pair: CreditPair!
+  # constant product
+  X: BigInt!
+  Y: BigInt!
+  Z: BigInt!
+  # reserves
+  assetReserve: BigInt!
+  collateralReserve: BigInt!
+  # natives
+  # liquidityAddress: Bytes!
+  # loanInterestAddress: Bytes!
+  # loanPrincipalAddress: Bytes!
+  # coverageInterestAddress: Bytes!
+  # coveragePrincipalAddress: Bytes!
+  # lockedDebtAddress: Bytes!
+
+  borrowPositions: [LockedDebtToken!] @derivedFrom(field: "pool")
+
+  # Created at
+  timestamp: BigInt!
+  block: BigInt!
+
+  farm: LPFarmPool
+
+  totalBorrowed: BigInt!
+  totalLent: BigInt!
+  totalRepayed: BigInt!
+
+  totalDebt: BigInt!
+  totalFee: BigInt!
+
+  totalBorrowedUSD: BigDecimal!
+  totalLentUSD: BigDecimal!
+  totalRepayedUSD: BigDecimal!
+  totalDebtUSD: BigDecimal!
+  assetReserveUSD: BigDecimal!
+  collateralReserveUSD: BigDecimal!
+  totalFeeUSD: BigDecimal!
+
+  transactionCount: BigInt!
+  lendTransactionCount: BigInt!
+  borrowTransactionCount: BigInt!
+  liquidityTransactionCount: BigInt!
+
+  creditPositions: [CreditPosition!] @derivedFrom(field: "pool")
+  transactions: [CreditTransaction!]! @derivedFrom(field: "pool")
+}
+
+type CreditPoolDayData @entity {
+  id: ID!
+  date: Int!
+  pool: CreditPairPool!
+
+  # reserves
+  assetReserve: BigInt!
+  collateralReserve: BigInt!
+
+  X: BigInt!
+  Y: BigInt!
+  Z: BigInt!
+
+  totalBorrowed: BigInt!
+  totalLent: BigInt!
+  totalRepayed: BigInt!
+  # totalCollateral: BigInt!
+
+  #usd values
+  totalBorrowedUSD: BigDecimal!
+  totalLentUSD: BigDecimal!
+  totalRepayedUSD: BigDecimal!
+  # totalCollateralUSD: BigDecimal!
+  assetReserveUSD: BigDecimal!
+  collateralReserveUSD: BigDecimal!
+}
+
+type CreditPosition @entity {
+  id: ID!
+  APR: BigDecimal!
+  CDP: BigDecimal!
+  owner: User!
+  pool: CreditPairPool!
+  positionType: String!
+  borrowAmount: BigInt!
+  debt: BigInt!
+}
+
+type CreditPoolHourData @entity {
+  id: ID!
+  hourStartUnix: Int!
+  pool: CreditPairPool!
+
+  # reserves
+  assetReserve: BigInt!
+  collateralReserve: BigInt!
+
+  X: BigInt!
+  Y: BigInt!
+  Z: BigInt!
+
+  totalBorrowed: BigInt!
+  totalLent: BigInt!
+  totalRepayed: BigInt!
+  # totalCollateral: BigInt!
+
+  #usd values
+  totalBorrowedUSD: BigDecimal!
+  totalLentUSD: BigDecimal!
+  totalRepayedUSD: BigDecimal!
+  # totalCollateralUSD: BigDecimal!
+  assetReserveUSD: BigDecimal!
+  collateralReserveUSD: BigDecimal!
+}
+
+type LiquidityPositionCredit @entity {
+  id: ID!
+  user: User!
+  pair: CreditPair!
+  liquidityTokenBalance: BigDecimal!
+}
+
+# only borrow CDTs are persisted
+type LockedDebtToken @entity {
+  # {collateralizedDebtAddress}-{tokenId}
+  id: ID!
+  user: User!
+  pool: CreditPairPool!
+  # cdp NFT address
+  lockedDebtAddress: Bytes!
+  # nft id
+  tokenId: BigInt!
+}
+
+type User @entity {
+  id: ID!
+  creditLiquidityPositions: [LiquidityPositionCredit!]
+    @derivedFrom(field: "user")
+  swapLiquidityPositions: [LiquidityPositionSwap!] @derivedFrom(field: "user")
+  usdSwapped: BigDecimal!
+  farmPositions: [LPFarmPosition!] @derivedFrom(field: "user")
+  stakedCreditAllocation: BigInt!
+  creditPositions: [CreditPosition!] @derivedFrom(field: "owner")
+}
+
+# ===================LP FARMING===================
+
+type LPFarm @entity {
+  # Contract address
+  id: ID!
+
+  # Owner
+  owner: Bytes!
+
+  # Start block
+  startBlock: BigInt!
+
+  # Reward Token
+  token: Bytes!
+
+  # Emission Rate (Token per second)
+  emissionRate: BigInt!
+
+  # Total allocation point
+  totalAllocPoint: BigInt!
+
+  # Pools
+  pools: [LPFarmPool!]! @derivedFrom(field: "owner")
+
+  # LPFarmPool count
+  poolCount: BigInt!
+
+  # LPFarmHistory
+  LPFarmHistory: [LPFarmHistory!]! @derivedFrom(field: "owner")
+}
+
+type LPFarmHistory @entity {
+  # Master chef id concatenated with timestamp
+  id: ID!
+
+  # Owner (LPFarm, LPFarmPool, or FarmPositions).
+  owner: LPFarm!
+
+  # Timestamp
+  timestamp: BigInt!
+
+  # Block
+  block: BigInt!
+}
+
+type LPFarmPool @entity {
+  # Index of pool in poolInfo on MasterChef contract
+  id: ID!
+
+  # Owner
+  owner: LPFarm!
+
+  maturity: BigInt!
+
+  # Allocation point
+  allocPoint: BigInt!
+
+  # Last reward block
+  lastRewardTime: BigInt!
+
+  # Accumulated token per share
+  accTokenPerShare: BigInt!
+
+  # SLP token balance
+  balance: BigInt!
+
+  # LPFarmPool users
+  users: [LPFarmPosition!]! @derivedFrom(field: "pool")
+
+  # User count
+  positionCount: BigInt!
+
+  # Timestamp
+  timestamp: BigInt!
+
+  # Block
+  block: BigInt!
+
+  # Expired
+  hasExpired: Boolean!
+}
+
+type LPFarmPosition @entity {
+  # LPFarmPool id concatenated with user address
+  id: ID!
+
+  creditPositionId: BigDecimal
+
+  # User address
+  user: User!
+
+  # Related pool
+  pool: LPFarmPool
+
+  # Amount
+  amount: BigInt!
+
+  # Reward debt
+  rewardDebt: BigInt!
+
+  # Tokens harvested
+  tokensHarvested: BigDecimal!
+
+  # Timestamp
+  timestamp: BigInt!
+
+  # Block
+  block: BigInt!
+
+  #usd
+  rewardDebtUSD: BigDecimal!
+  tokensHarvestedUSD: BigDecimal!
+}
+
+# ===================CREDIT STAKING===================
+
+type StakingData @entity {
+  id: ID!
+  distributedTokens: [Bytes!]!
+  dividendsInfo: [StakingDividendsInfo!]! @derivedFrom(field: "creditStaking")
+  users: [StakingUserInfo!]! @derivedFrom(field: "creditStaking")
+  creditToken: Bytes!
+  totalAllocation: BigInt!
+  totalAllocationUSD: BigDecimal!
+  cycleDurationSeconds: BigInt!
+  currentCycleStartTime: BigInt!
+  unstakingPenalties: [BigInt!]!
+  lastDividendsUpdatedCycleStartBlock: BigInt!
+}
+
+type StakingDividendsInfo @entity {
+  id: ID!
+  creditStaking: StakingData!
+  token: Bytes!
+  currentDistributionAmount: BigInt!
+  currentCycleDistributedAmount: BigInt!
+  pendingAmount: BigInt!
+  distributedAmount: BigInt!
+  accDividendsPerShare: BigInt!
+  lastUpdateTime: BigInt!
+  distributionDisabled: Boolean!
+  lastUpdatedCycle: BigInt!
+
+  #usd
+  accDividendsPerShareUSD: BigDecimal!
+  distributedAmountUSD: BigDecimal!
+  pendingAmountUSD: BigDecimal!
+  currentDistributionAmountUSD: BigDecimal!
+  currentCycleDistributedAmountUSD: BigDecimal!
+}
+
+type StakingUserInfo @entity {
+  id: ID!
+  creditStaking: StakingData!
+  pendingDividends: BigInt!
+  pendingDividendsUSD: BigDecimal!
+  rewardDebt: BigInt!
+  rewardDebtUSD: BigDecimal!
+}
+
+# ===================LIQ LAYER===================
+
+type SwapFactory @entity {
+  # factory address
+  id: ID!
+
+  # pair info
+  pairCount: Int!
+
+  # total volume
+  totalVolumeUSD: BigDecimal!
+  totalVolumeETH: BigDecimal!
+
+  # untracked values - less confident USD scores
+  untrackedVolumeUSD: BigDecimal!
+
+  # total liquidity
+  totalLiquidityUSD: BigDecimal!
+  totalLiquidityETH: BigDecimal!
+
+  # transactions
+  txCount: BigInt!
+}
+
+type Token @entity {
+  # token address
+  id: ID!
+
+  # mirrored from the smart contract
+  symbol: String!
+  name: String!
+  decimals: BigInt!
+
+  # used for other stats like marketcap
+  totalSupply: BigInt!
+
+  # token specific volume
+  tradeVolume: BigDecimal!
+  tradeVolumeUSD: BigDecimal!
+  untrackedVolumeUSD: BigDecimal!
+
+  # transactions across all pairs
+  txCount: BigInt!
+
+  # liquidity across all pairs
+  totalLiquidity: BigDecimal!
+
+  # derived prices
+  derivedETH: BigDecimal
+
+  # derived fields
+  tokenDayData: [TokenDayData!]! @derivedFrom(field: "token")
+  pairDayDataBase: [SwapPairDayData!]! @derivedFrom(field: "token0")
+  pairDayDataQuote: [SwapPairDayData!]! @derivedFrom(field: "token1")
+  pairBase: [SwapPair!]! @derivedFrom(field: "token0")
+  pairQuote: [SwapPair!]! @derivedFrom(field: "token1")
+}
+
+type SwapPair @entity {
+  # pair address
+  id: ID!
+
+  # mirrored from the smart contract
+  token0: Token!
+  token1: Token!
+  reserve0: BigDecimal!
+  reserve1: BigDecimal!
+  totalSupply: BigDecimal!
+
+  # derived liquidity
+  reserveETH: BigDecimal!
+  reserveUSD: BigDecimal!
+  # used for separating per pair reserves and global
+  trackedReserveETH: BigDecimal!
+
+  # Price in terms of the asset pair
+  token0Price: BigDecimal!
+  token1Price: BigDecimal!
+
+  # lifetime volume stats
+  volumeToken0: BigDecimal!
+  volumeToken1: BigDecimal!
+  volumeUSD: BigDecimal!
+  untrackedVolumeUSD: BigDecimal!
+  txCount: BigInt!
+
+  # creation stats
+  createdAtTimestamp: BigInt!
+  createdAtBlockNumber: BigInt!
+
+  # Fields used to help derived relationship
+  liquidityProviderCount: BigInt! # used to detect new exchanges
+  # derived fields
+  pairHourData: [SwapPairHourData!]! @derivedFrom(field: "pair")
+  pairDayData: [SwapPairDayData!]! @derivedFrom(field: "pair")
+  liquidityPositions: [LiquidityPositionSwap!]! @derivedFrom(field: "pair")
+  liquidityPositionSnapshots: [LiquidityPositionSnapshotSwap!]!
+    @derivedFrom(field: "pair")
+  mints: [SwapMint!]! @derivedFrom(field: "pair")
+  burns: [SwapBurn!]! @derivedFrom(field: "pair")
+  swaps: [Swap!]! @derivedFrom(field: "pair")
+}
+
+type LiquidityPositionSwap @entity {
+  id: ID!
+  user: User!
+  pair: SwapPair!
+  liquidityTokenBalance: BigDecimal!
+}
+
+# saved over time for return calculations, gets created and never updated
+type LiquidityPositionSnapshotSwap @entity {
+  id: ID!
+  liquidityPosition: LiquidityPositionSwap!
+  timestamp: Int! # saved for fast historical lookups
+  block: Int! # saved for fast historical lookups
+  user: User! # reference to user
+  pair: SwapPair! # reference to pair
+  token0PriceUSD: BigDecimal! # snapshot of token0 price
+  token1PriceUSD: BigDecimal! # snapshot of token1 price
+  reserve0: BigDecimal! # snapshot of pair token0 reserves
+  reserve1: BigDecimal! # snapshot of pair token1 reserves
+  reserveUSD: BigDecimal! # snapshot of pair reserves in USD
+  liquidityTokenTotalSupply: BigDecimal! # snapshot of pool token supply
+  liquidityTokenBalance: BigDecimal! # snapshot of users pool token balance
+  gaugeBalance: BigDecimal
+}
+
+type SwapTransaction @entity {
+  id: ID! # txn hash
+  blockNumber: BigInt!
+  timestamp: BigInt!
+  # This is not the reverse of Mint.transaction; it is only used to
+  # track incomplete mints (similar for burns and swaps)
+  mints: [SwapMint!]!
+  burns: [SwapBurn!]!
+  swaps: [Swap!]!
+}
+
+type SwapMint @entity {
+  # transaction hash + "-" + index in mints Transaction array
+  id: ID!
+  transaction: SwapTransaction!
+  timestamp: BigInt! # need this to pull recent txns for specific token or pair
+  pair: SwapPair!
+
+  # populated from the primary Transfer event
+  to: Bytes!
+  liquidity: BigDecimal!
+
+  # populated from the Mint event
+  sender: Bytes
+  amount0: BigDecimal
+  amount1: BigDecimal
+  logIndex: BigInt
+  # derived amount based on available prices of tokens
+  amountUSD: BigDecimal
+
+  # optional fee fields, if a Transfer event is fired in _mintFee
+  feeTo: Bytes
+  feeLiquidity: BigDecimal
+}
+
+type SwapBurn @entity {
+  # transaction hash + "-" + index in mints Transaction array
+  id: ID!
+  transaction: SwapTransaction!
+  timestamp: BigInt! # need this to pull recent txns for specific token or pair
+  pair: SwapPair!
+
+  # populated from the primary Transfer event
+  liquidity: BigDecimal!
+
+  # populated from the Burn event
+  sender: Bytes
+  amount0: BigDecimal
+  amount1: BigDecimal
+  to: Bytes
+  logIndex: BigInt
+  # derived amount based on available prices of tokens
+  amountUSD: BigDecimal
+
+  # mark uncomplete in ETH case
+  needsComplete: Boolean!
+
+  # optional fee fields, if a Transfer event is fired in _mintFee
+  feeTo: Bytes
+  feeLiquidity: BigDecimal
+}
+
+type Swap @entity {
+  # transaction hash + "-" + index in swaps Transaction array
+  id: ID!
+  transaction: SwapTransaction!
+  timestamp: BigInt! # need this to pull recent txns for specific token or pair
+  pair: SwapPair!
+
+  # populated from the Swap event
+  sender: Bytes!
+  from: Bytes! # the EOA that initiated the txn
+  amount0In: BigDecimal!
+  amount1In: BigDecimal!
+  amount0Out: BigDecimal!
+  amount1Out: BigDecimal!
+  to: Bytes!
+  logIndex: BigInt
+
+  # derived info
+  amountUSD: BigDecimal!
+}
+
+# stores for USD calculations
+type Bundle @entity {
+  id: ID!
+  ethPrice: BigDecimal! # price of ETH usd
+}
+
+# Data accumulated and condensed into day stats for all of Uniswap
+type UniswapDayData @entity {
+  id: ID! # timestamp rounded to current day by dividing by 86400
+  date: Int!
+
+  dailyVolumeETH: BigDecimal!
+  dailyVolumeUSD: BigDecimal!
+  dailyVolumeUntracked: BigDecimal!
+
+  totalVolumeETH: BigDecimal!
+  totalLiquidityETH: BigDecimal!
+  totalVolumeUSD: BigDecimal! # Accumulate at each trade, not just calculated off whatever totalVolume is. making it more accurate as it is a live conversion
+  totalLiquidityUSD: BigDecimal!
+
+  txCount: BigInt!
+}
+
+type SwapPairHourData @entity {
+  id: ID!
+  hourStartUnix: Int! # unix timestamp for start of hour
+  pair: SwapPair!
+
+  # reserves
+  reserve0: BigDecimal!
+  reserve1: BigDecimal!
+
+  # total supply for LP historical returns
+  totalSupply: BigDecimal!
+
+  # derived liquidity
+  reserveUSD: BigDecimal!
+
+  # volume stats
+  hourlyVolumeToken0: BigDecimal!
+  hourlyVolumeToken1: BigDecimal!
+  hourlyVolumeUSD: BigDecimal!
+  hourlyTxns: BigInt!
+}
+
+# Data accumulated and condensed into day stats for each exchange
+type SwapPairDayData @entity {
+  id: ID!
+  date: Int!
+  pair: SwapPair!
+  token0: Token!
+  token1: Token!
+
+  # reserves
+  reserve0: BigDecimal!
+  reserve1: BigDecimal!
+
+  # total supply for LP historical returns
+  totalSupply: BigDecimal!
+
+  # derived liquidity
+  reserveUSD: BigDecimal!
+
+  # volume stats
+  dailyVolumeToken0: BigDecimal!
+  dailyVolumeToken1: BigDecimal!
+  dailyVolumeUSD: BigDecimal!
+  dailyTxns: BigInt!
+}
+
+type TokenDayData @entity {
+  id: ID!
+  date: Int!
+  token: Token!
+
+  # volume stats
+  dailyVolumeToken: BigDecimal!
+  dailyVolumeETH: BigDecimal!
+  dailyVolumeUSD: BigDecimal!
+  dailyTxns: BigInt!
+
+  # liquidity stats
+  totalLiquidityToken: BigDecimal!
+  totalLiquidityETH: BigDecimal!
+  totalLiquidityUSD: BigDecimal!
+
+  # price stats
+  priceUSD: BigDecimal!
+}
+# goldsky subgraph webhook create credit-test/1.1.0 --name transactions-webhook --entity creditTransaction --url https://us-central1-xcalibur-c38cf.cloudfunctions.net/creditTransactionsWebHook

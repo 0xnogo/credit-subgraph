@@ -1,0 +1,42 @@
+{
+  "network": "arbitrum-goerli",
+  "lending_factory": {
+    "address": "0x722A9cDF7671a7dA2e7005662b0C730e32940832",
+    "startBlock": 34503302
+  },
+  "lp_farming": {
+    "address": "0x9c580af6c45901FB0F1C7E9328646A08D21b92c6",
+    "startBlock": 34503302
+  },
+  "credit_staking": {
+    "address": "0x3F160Ca59818Df6fd08F7b207c87E864a6247468",
+    "startBlock": 34503302
+  },
+  "swap_factory": {
+    "address": "0x11B54B12fF695eb0233DE4D6Aba26B2FB1f53d33",
+    "startBlock": 34503302
+  },
+  "distributor": {
+    "address": "0xf163BBC13F183C685f6804b7afEaA6cc745890b8",
+    "startBlock": 34503302
+  },
+  "credit_position": {
+    "address": "0x7259e7A89C80962448a8F9df3C82f9551a7485b7",
+    "startBlock": 34503302
+  },
+  "convenience_adress": "0x6CD98AF50103e6d486393AC7cEfF98BE114C39e9",
+  "credit_token_address":"0xa0e9DDE8fa9AeEa39f459F66831b35A0620f3D99",
+  "weth_address": "0xEe01c0CD76354C383B8c7B4e65EA88D00B06f36f",
+  "usdc_weth_address": "0xC2Fdff3DeF4665c44e171B52965166098d814652",
+  "//": "[WBTC]",
+  "unused": ["0x2f2a2543b76a4166549f7aab2e75bef0aefc5b0f"],
+  "///": "[WETH, USDC, USDT, DAI, FRAX, WBTC]",
+  "whitelist": [
+    "0xEe01c0CD76354C383B8c7B4e65EA88D00B06f36f",
+    "0xCD271697983Ca096E18DBed0D95e64BDFceb1Bfc",
+    "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
+    "0xda10009cbd5d07dd0cecc66161fc93d7c9000da1",
+    "0x17fc002b466eec40dae837fc4be5c67993ddbd6f",
+    "0x2f2a2543b76a4166549f7aab2e75bef0aefc5b0f"
+  ]
+}

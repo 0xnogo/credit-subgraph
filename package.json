@@ -1,0 +1,44 @@
+{
+  "name": "Credit-subgraph",
+  "license": "UNLICENSED",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "deploy": "yarn prepare:arbitrum && graph deploy --node https://api.thegraph.com/deploy/ 3six9/Credit",
+    "deploy:arbitrum-goerli": "yarn prepare:arbitrum-goerli && graph deploy --product hosted-service revolver0cel0t/volatilis-credit-testnet",
+    "prepare:local": "yarn workspaces run prepare:local && mustache config/localhost.json template.yaml > subgraph.yaml",
+    "prepare:arbitrum-goerli": "yarn workspaces run prepare:arbitrum-goerli && mustache config/arbitrum-goerli.json template.yaml > subgraph.yaml",
+    "prepare:arbitrum": "yarn workspaces run prepare:arbitrum && mustache config/arbitrum.json template.yaml > subgraph.yaml",
+    "prepare:meliora": "yarn workspaces run prepare:meliora && mustache config/meliora.json template.yaml > subgraph.yaml",
+    "create-local": "graph create --node http://localhost:8020/ 3six9/Credit",
+    "remove-local": "graph remove --node http://localhost:8020/ 3six9/Credit",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 3six9/Credit",
+    "deploy-meliora": "goldsky subgraph deploy credit-test/ --path build",
+    "test": "graph test"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "0.51.0",
+    "@graphprotocol/graph-ts": "0.30.0",
+    "@openzeppelin/contracts": "^4.9.0",
+    "mustache": "^4.2.0",
+    "const": "1.0.0",
+
+    "dotenv": "^16.0.1",
+    "firebase-admin": "^11.0.1",
+    "firebase-functions": "^3.22.0",
+    "@typescript-eslint/eslint-plugin": "^5.12.0",
+    "@typescript-eslint/parser": "^5.12.0",
+    "eslint": "^8.9.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-import": "^2.25.4",
+    "firebase-functions-test": "^0.2.0",
+    "typescript": "^4.5.4"
+  },
+  "devDependencies": {
+    "matchstick-as": "0.5.0"
+  }
+}

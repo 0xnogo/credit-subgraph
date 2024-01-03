@@ -1,0 +1,43 @@
+{
+    "network": "meliora-testnet",
+    "lending_factory": {
+      "address": "0xdc371c0277B1822B2F9164eC5f476364E654A472",
+      "startBlock": 0
+    },
+    "lp_farming": {
+      "address": "0x0000000000000000000000000000000000000000",
+      "startBlock": 0
+    },
+    "credit_staking": {
+      "address": "0x0000000000000000000000000000000000000000",
+      "startBlock": 0
+    },
+    "swap_factory": {
+      "address": "0x9d4bc26D66D9D19044f9CAB2D67B66a14CCF88E5",
+      "startBlock": 0
+    },
+    "distributor": {
+      "address": "0x0000000000000000000000000000000000000000",
+      "startBlock": 0
+    },
+    "credit_position": {
+      "address": "0x55fA7fd435bBBe3de9d7EBCF75CBfB242911B294",
+      "startBlock": 0
+    },
+    "convenience_adress": "0x74a91DEBfc99E8BBbae1DCd893088a06DE379812",
+    "credit_token_address":"0x0000000000000000000000000000000000000000",
+    "weth_address": "0xF5c6100Fa77971b2B531c752eA82874Df8bAB44A",
+    "usdc_weth_address": "0xbae3385b76c4b545ad0b66846dcd0cbed543a3a7",
+    "//": "[WBTC]",
+    "unused": ["0x2f2a2543b76a4166549f7aab2e75bef0aefc5b0f"],
+    "///": "[WETH, USDC, USDT, DAI, FRAX, WBTC]",
+    "whitelist": [
+      "0xF5c6100Fa77971b2B531c752eA82874Df8bAB44A",
+      "0xf32591AcCB308f691f7D3efc93EF98c48C5F4a62",
+      "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
+      "0xda10009cbd5d07dd0cecc66161fc93d7c9000da1",
+      "0x17fc002b466eec40dae837fc4be5c67993ddbd6f",
+      "0x2f2a2543b76a4166549f7aab2e75bef0aefc5b0f"
+    ]
+  }
+  
